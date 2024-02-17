@@ -20,3 +20,15 @@ const poped = queen.pop()
 if(poped) {
   poped.toFixed()
 }
+
+/**
+ * 泛型在接口中的使用
+ */
+interface KeyPair<T,U> {
+  key: T;
+  value: U;
+}
+let kp1: KeyPair<number,string> = {key: 1, value: 'str'}
+let kp2: KeyPair<string, number> = {key: 'str', value: 1}
+let arr: number[] = [1,2,3]
+let arrTwo: Array<number> = [1,2]
