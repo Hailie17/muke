@@ -39,3 +39,9 @@ const result2 = sum2(2,3)
 // 字面量别名
 type Directions = 'Up' | 'Down' | 'Left' | 'Right'
 let toWher: Directions = 'Left'
+// 交叉类型
+interface IName {
+  name: string
+}
+type IPerson = IName & { age: number }
+let person: IPerson = { name: '11', age: 12}
