@@ -4,6 +4,7 @@ import HelloWorld from './components/HelloWorld.vue'
 export default defineComponent({
   name: 'App',
   setup() {
+    // 需要 .value 来访问值
     const count = ref(0)
     // 参数
     // 只能是 Object
