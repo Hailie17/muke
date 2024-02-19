@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, ref, reactive } from 'vue'
+import { defineComponent, ref, reactive, computed } from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
 export default defineComponent({
   name: 'App',
@@ -9,6 +9,12 @@ export default defineComponent({
       age: 22,
       name: 'lili'
     })
+    const buttonStatus = computed(() => {
+      return {
+        text: like.age >= 10 ? '可以参与' : '未满10岁不可以参加',
+        disabled: like.age < 10
+      }
+    })
     const increase = () => {
       count.value++
       like.age ++
@@ -16,7 +22,8 @@ export default defineComponent({
     return {
       count,
       increase,
-      like
+      like,
+      buttonStatus
     }
   }
 })
@@ -26,6 +33,7 @@ export default defineComponent({
   <div>
     <h1>{{ like.age }}</h1>
     <button type="button" @click="increase">点我加</button>
+    <button type="button" :disabled="buttonStatus.disabled">{{ buttonStatus.text }}</button>
     <a href="https://vitejs.dev" target="_blank">
       <img src="/vite.svg" class="logo" alt="Vite logo" />
     </a>
