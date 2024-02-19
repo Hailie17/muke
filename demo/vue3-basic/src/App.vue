@@ -9,6 +9,9 @@ export default defineComponent({
       age: 22,
       name: 'lili'
     })
+    // computed 计算属性
+    // 基于响应式依赖被缓存
+    // 计算属性默认只读
     const buttonStatus = computed(() => {
       return {
         text: like.age >= 10 ? '可以参与' : '未满10岁不可以参加',
