@@ -5,6 +5,8 @@ export default defineComponent({
   name: 'App',
   setup() {
     const count = ref(0)
+    // 参数
+    // 只能是 Object
     const like = reactive({
       age: 22,
       name: 'lili'
