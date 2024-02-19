@@ -1,9 +1,25 @@
-<script setup lang="ts">
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
+export default defineComponent({
+  name: 'App',
+  setup() {
+    const count = ref(0)
+    const increase = () => {
+      count.value++
+    }
+    return {
+      count,
+      increase
+    }
+  }
+})
 </script>
 
 <template>
   <div>
+    <h1>{{ count }}</h1>
+    <button type="button" @click="increase">点我加</button>
     <a href="https://vitejs.dev" target="_blank">
       <img src="/vite.svg" class="logo" alt="Vite logo" />
     </a>
