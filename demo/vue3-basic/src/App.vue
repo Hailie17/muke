@@ -1,16 +1,22 @@
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { defineComponent, ref, reactive } from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
 export default defineComponent({
   name: 'App',
   setup() {
     const count = ref(0)
+    const like = reactive({
+      age: 22,
+      name: 'lili'
+    })
     const increase = () => {
       count.value++
+      like.age ++
     }
     return {
       count,
-      increase
+      increase,
+      like
     }
   }
 })
@@ -18,7 +24,7 @@ export default defineComponent({
 
 <template>
   <div>
-    <h1>{{ count }}</h1>
+    <h1>{{ like.age }}</h1>
     <button type="button" @click="increase">点我加</button>
     <a href="https://vitejs.dev" target="_blank">
       <img src="/vite.svg" class="logo" alt="Vite logo" />
