@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, ref, reactive, computed } from 'vue'
+import { defineComponent, ref, reactive, computed, watch } from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
 export default defineComponent({
   name: 'App',
@@ -21,6 +21,15 @@ export default defineComponent({
         disabled: like.age < 10
       }
     })
+    // watch 三种写法
+    // ref
+    // 函数 写法
+    // reactive
+    watch(count, (newVal, oldVal) => {
+      
+      console.log(newVal, 'new');
+      console.log(oldVal, 'old');
+    }
     const increase = () => {
       count.value++
       like.age ++
