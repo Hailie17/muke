@@ -26,10 +26,9 @@ export default defineComponent({
     // 函数 写法
     // reactive
     watch(count, (newVal, oldVal) => {
-      
       console.log(newVal, 'new');
       console.log(oldVal, 'old');
-    }
+    })
     const increase = () => {
       count.value++
       like.age ++
