@@ -1,16 +1,26 @@
 <script lang="ts">
-import { defineComponent, ref, reactive, computed, watch } from 'vue'
+import { defineComponent, ref, reactive, computed, watch, onMounted, onUpdated } from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
 export default defineComponent({
   name: 'App',
   setup() {
     // 需要 .value 来访问值
     const count = ref(0)
+    // 模板引用 ref
+    const headline = ref<null | HTMLElement> (null)
     // 参数
     // 只能是 Object
     const like = reactive({
       age: 22,
       name: 'lili'
+    })
+    onMounted(()=> {
+      console.log('onMounted');
+      
+    })
+    onUpdated(() => {
+      console.log('onUpdated');
+      
     })
     // computed 计算属性
     // 基于响应式依赖被缓存
@@ -37,7 +47,8 @@ export default defineComponent({
       count,
       increase,
       like,
-      buttonStatus
+      buttonStatus,
+      headline
     }
   }
 })
@@ -45,7 +56,7 @@ export default defineComponent({
 
 <template>
   <div>
-    <h1>{{ like.age }}</h1>
+    <h1 ref="headline">{{ like.age }}</h1>
     <button type="button" @click="increase">点我加</button>
     <button type="button" :disabled="buttonStatus.disabled">{{ buttonStatus.text }}</button>
     <a href="https://vitejs.dev" target="_blank">
