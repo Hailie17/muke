@@ -1,8 +1,12 @@
 <script lang="ts">
 import { defineComponent, ref, reactive, computed, watch, onMounted, onUpdated } from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
+import MyProfile from './components/MyProfile.vue'
 export default defineComponent({
   name: 'App',
+  components: {
+    MyProfile
+  },
   setup() {
     // 需要 .value 来访问值
     const count = ref(0)
@@ -66,6 +70,7 @@ export default defineComponent({
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
+  <my-profile :user="like" />
   <HelloWorld msg="Vite + Vue" />
 </template>
 
