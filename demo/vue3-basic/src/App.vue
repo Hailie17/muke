@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, ref, reactive, computed, watch, onMounted, onUpdated } from 'vue'
+import { defineComponent, ref, reactive, computed, watch, onMounted, onUnmounted, onUpdated } from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
 import MyProfile from './components/MyProfile.vue'
 export default defineComponent({
@@ -18,13 +18,22 @@ export default defineComponent({
       age: 22,
       name: 'lili'
     })
+    const x = ref(0)
+    const y = ref(0)
+  
+    const updateMouse = (e: MouseEvent) => {
+      x.value = e.pageX
+      y.value = e.pageY
+    }
     onMounted(()=> {
-      console.log('onMounted');
-      
+      document.addEventListener('click', updateMouse)
     })
     onUpdated(() => {
       console.log('onUpdated');
       
+    })
+    onUnmounted(() => {
+      document.removeEventListener('click', updateMouse)
     })
     // computed 计算属性
     // 基于响应式依赖被缓存
@@ -56,7 +65,9 @@ export default defineComponent({
       like,
       buttonStatus,
       headline,
-      onChange
+      onChange,
+      x,
+      y
     }
   }
 })
@@ -74,6 +85,8 @@ export default defineComponent({
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
+  <h1>X: {{ x }}</h1>
+  <h1>Y: {{ y }}</h1>
   <my-profile :user="like" @change="onChange" />
   <HelloWorld msg="Vite + Vue" />
 </template>
