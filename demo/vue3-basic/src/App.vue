@@ -2,6 +2,7 @@
 import { defineComponent, ref, reactive, computed, watch, onMounted, onUnmounted, onUpdated } from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
 import MyProfile from './components/MyProfile.vue'
+import useMousePositon from './hooks/useMousePosition'
 export default defineComponent({
   name: 'App',
   components: {
@@ -18,23 +19,7 @@ export default defineComponent({
       age: 22,
       name: 'lili'
     })
-    const x = ref(0)
-    const y = ref(0)
-  
-    const updateMouse = (e: MouseEvent) => {
-      x.value = e.pageX
-      y.value = e.pageY
-    }
-    onMounted(()=> {
-      document.addEventListener('click', updateMouse)
-    })
-    onUpdated(() => {
-      console.log('onUpdated');
-      
-    })
-    onUnmounted(() => {
-      document.removeEventListener('click', updateMouse)
-    })
+    const {x, y} = useMousePositon() 
     // computed 计算属性
     // 基于响应式依赖被缓存
     // 计算属性默认只读
