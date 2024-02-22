@@ -47,12 +47,16 @@ export default defineComponent({
       count.value++
       like.age ++
     }
+    const onChange = (hidden: boolean) => {
+      document.title = hidden ? '隐藏年龄' : '显示年龄'
+    }
     return {
       count,
       increase,
       like,
       buttonStatus,
-      headline
+      headline,
+      onChange
     }
   }
 })
@@ -70,7 +74,7 @@ export default defineComponent({
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
-  <my-profile :user="like" />
+  <my-profile :user="like" @change="onChange" />
   <HelloWorld msg="Vite + Vue" />
 </template>
 

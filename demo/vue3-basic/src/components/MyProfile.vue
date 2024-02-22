@@ -3,13 +3,14 @@
     <h2>
       Name: {{ user.name }}
     </h2>
-    <h2>Age: {{ user.age }}</h2>
-    <h2>DoubleAge: {{ doubleAge }}</h2>
+    <h2 v-if="!isHidden">Age: {{ user.age }}</h2>
+    <h2 v-if="!isHidden">DoubleAge: {{ doubleAge }}</h2>
+    <button type="button" @click="toggleHide">{{ isHidden ? '显示' : '隐藏' }}</button>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, PropType } from 'vue';
+import { defineComponent, computed, PropType, ref } from 'vue';
 interface Person {
   name: string;
   age: number;
@@ -22,10 +23,18 @@ export default defineComponent({
       required: true
     }
   },
-  setup(props) {
+  emits: ['change'],
+  setup(props, ctx) {
+    const isHidden = ref(false)
     const doubleAge = computed(() => props.user.age * 2)
+    const toggleHide = () => {
+      isHidden.value = !isHidden.value
+      ctx.emit('change', isHidden.value)
+    }
     return {
-      doubleAge
+      doubleAge,
+      isHidden,
+      toggleHide
     }
   }
 })
