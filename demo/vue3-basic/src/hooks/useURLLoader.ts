@@ -1,12 +1,12 @@
 import { reactive } from 'vue'
 import axios from 'axios'
-interface IResult {
-  result: any;
+interface IResult<T> {
+  result: null | T;
   loading: boolean;
   error: any;
 }
-const useURLLoader = (url: string) => {
-  const data: IResult = reactive({
+const useURLLoader = <T>(url: string) => {
+  const data: IResult<T> = reactive({
     result: null,
     loading: true,
     error: null
