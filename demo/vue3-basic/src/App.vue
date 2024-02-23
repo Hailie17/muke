@@ -3,6 +3,7 @@ import { defineComponent, ref, reactive, computed, watch, onMounted, onUnmounted
 import HelloWorld from './components/HelloWorld.vue'
 import MyProfile from './components/MyProfile.vue'
 import useMousePositon from './hooks/useMousePosition'
+import useURLLoader from './hooks/useURLLoader'
 export default defineComponent({
   name: 'App',
   components: {
@@ -20,6 +21,7 @@ export default defineComponent({
       name: 'lili'
     })
     const {x, y} = useMousePositon() 
+    const data = useURLLoader('https://dog.ceo/api/breeds/image/random')
     // computed 计算属性
     // 基于响应式依赖被缓存
     // 计算属性默认只读
@@ -52,7 +54,8 @@ export default defineComponent({
       headline,
       onChange,
       x,
-      y
+      y,
+      data
     }
   }
 })
@@ -73,6 +76,8 @@ export default defineComponent({
   <h1>X: {{ x }}</h1>
   <h1>Y: {{ y }}</h1>
   <my-profile :user="like" @change="onChange" />
+  <h1 v-if="data.loading">正在加载</h1>
+  <img v-else :src="data.result.message" alt="">
   <HelloWorld msg="Vite + Vue" />
 </template>
 
