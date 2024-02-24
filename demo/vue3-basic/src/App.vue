@@ -4,6 +4,7 @@ import HelloWorld from './components/HelloWorld.vue'
 import MyProfile from './components/MyProfile.vue'
 import useMousePositon from './hooks/useMousePosition'
 import useURLLoader from './hooks/useURLLoader'
+import { langKeys } from './keys'
 interface DogResult {
   message: string;
   status: string;
@@ -37,7 +38,7 @@ watch(count, (newVal, oldVal) => {
   console.log(newVal, 'new');
   console.log(oldVal, 'old');
 })
-provide('lang', 'ch')
+provide(langKeys, 'ch')
 const increase = () => {
   count.value++
   like.age ++
