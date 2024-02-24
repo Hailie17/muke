@@ -5,7 +5,7 @@ interface IResult<T> {
   loading: boolean;
   error: any;
 }
-const useURLLoader = <T>(url: string) => {
+const useURLLoader = <T = any>(url: string) => {
   const data: IResult<T> = reactive({
     result: null,
     loading: true,

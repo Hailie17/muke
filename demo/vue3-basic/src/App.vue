@@ -1,64 +1,49 @@
-<script lang="ts">
-import { defineComponent, ref, reactive, computed, watch, onMounted, onUnmounted, onUpdated } from 'vue'
+<script setup lang="ts">
+import { ref, reactive, computed, watch } from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
 import MyProfile from './components/MyProfile.vue'
 import useMousePositon from './hooks/useMousePosition'
 import useURLLoader from './hooks/useURLLoader'
-export default defineComponent({
-  name: 'App',
-  components: {
-    MyProfile
-  },
-  setup() {
-    // 需要 .value 来访问值
-    const count = ref(0)
-    // 模板引用 ref
-    const headline = ref<null | HTMLElement> (null)
-    // 参数
-    // 只能是 Object
-    const like = reactive({
-      age: 22,
-      name: 'lili'
-    })
-    const {x, y} = useMousePositon() 
-    const data = useURLLoader('https://dog.ceo/api/breeds/image/random')
-    // computed 计算属性
-    // 基于响应式依赖被缓存
-    // 计算属性默认只读
-    const buttonStatus = computed(() => {
-      return {
-        text: like.age >= 10 ? '可以参与' : '未满10岁不可以参加',
-        disabled: like.age < 10
-      }
-    })
-    // watch 三种写法
-    // ref
-    // 函数 写法
-    // reactive
-    watch(count, (newVal, oldVal) => {
-      console.log(newVal, 'new');
-      console.log(oldVal, 'old');
-    })
-    const increase = () => {
-      count.value++
-      like.age ++
-    }
-    const onChange = (hidden: boolean) => {
-      document.title = hidden ? '隐藏年龄' : '显示年龄'
-    }
-    return {
-      count,
-      increase,
-      like,
-      buttonStatus,
-      headline,
-      onChange,
-      x,
-      y,
-      data
-    }
+interface DogResult {
+  message: string;
+  status: string;
+}
+// 需要 .value 来访问值
+const count = ref(0)
+// 模板引用 ref
+const headline = ref<null | HTMLElement> (null)
+// 参数
+// 只能是 Object
+const like = reactive({
+  age: 22,
+  name: 'lili'
+})
+const {x, y} = useMousePositon() 
+const data = useURLLoader<DogResult>('https://dog.ceo/api/breeds/image/random')
+// computed 计算属性
+// 基于响应式依赖被缓存
+// 计算属性默认只读
+const buttonStatus = computed(() => {
+  return {
+    text: like.age >= 10 ? '可以参与' : '未满10岁不可以参加',
+    disabled: like.age < 10
   }
 })
+// watch 三种写法
+// ref
+// 函数 写法
+// reactive
+watch(count, (newVal, oldVal) => {
+  console.log(newVal, 'new');
+  console.log(oldVal, 'old');
+})
+const increase = () => {
+  count.value++
+  like.age ++
+}
+const onChange = (hidden: boolean) => {
+  document.title = hidden ? '隐藏年龄' : '显示年龄'
+}
 </script>
 
 <template>
