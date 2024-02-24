@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, reactive, computed, watch } from 'vue'
+import { ref, reactive, computed, watch, provide } from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
 import MyProfile from './components/MyProfile.vue'
 import useMousePositon from './hooks/useMousePosition'
@@ -37,6 +37,7 @@ watch(count, (newVal, oldVal) => {
   console.log(newVal, 'new');
   console.log(oldVal, 'old');
 })
+provide('lang', 'ch')
 const increase = () => {
   count.value++
   like.age ++

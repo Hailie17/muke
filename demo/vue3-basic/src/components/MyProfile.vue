@@ -1,5 +1,6 @@
 <template>
   <div class="my-profile">
+    <HelloWorld msg="hello from profile" />
     <h2>
       Name: {{ user.name }}
     </h2>
@@ -9,35 +10,30 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed, PropType, ref } from 'vue';
-interface Person {
+<script setup lang="ts">
+import { computed, ref } from 'vue';
+import HelloWorld from './HelloWorld.vue';
+interface IPerson {
   name: string;
   age: number;
 }
-export default defineComponent({
-  name: 'MyProfile',
-  props: {
-    user: {
-      type: Object as PropType<Person>,
-      required: true
-    }
-  },
-  emits: ['change'],
-  setup(props, ctx) {
-    const isHidden = ref(false)
-    const doubleAge = computed(() => props.user.age * 2)
-    const toggleHide = () => {
-      isHidden.value = !isHidden.value
-      ctx.emit('change', isHidden.value)
-    }
-    return {
-      doubleAge,
-      isHidden,
-      toggleHide
-    }
-  }
+interface IEvents {
+  (e: 'change', hidden: boolean): void
+}
+
+const props = withDefaults(defineProps<{user?: IPerson}>(), {
+  user: () => ({name: 'viking', age: 50})
 })
+
+const emit =  defineEmits<IEvents>()
+
+const isHidden = ref(false)
+const doubleAge = computed(() => props.user.age * 2)
+const toggleHide = () => {
+  isHidden.value = !isHidden.value
+  emit('change', isHidden.value)
+}
+
 </script>
 
 <style scoped>

@@ -1,13 +1,15 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, inject } from 'vue'
 
 defineProps<{ msg: string }>()
 
 const count = ref(0)
+const lang = inject('lang')
+
 </script>
 
 <template>
-  <h1>{{ msg }}</h1>
+  <h1>{{ msg }} - {{ lang }}</h1>
 
   <div class="card">
     <button type="button" @click="count++">count is {{ count }}</button>
