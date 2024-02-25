@@ -26,5 +26,8 @@ module.exports = {
     "rules": {
         "semi": 0,
         "vue/multi-word-component-names": "off"
+    },
+    "globals": {
+        "defineOptions": "readonly"
     }
 };

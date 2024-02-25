@@ -7,9 +7,11 @@
       'is-plain': plain,
       'is-round': round,
       'is-circle': circle,
-      'is-disabled': disabled
+      'is-disabled': disabled,
     }"
     :disabled="disabled"
+    :autofocus="autofocus"
+    :type="nativeType"
   >
     <span>
       <slot />
@@ -17,15 +19,13 @@
   </button>
 </template>
 
-<script lang="ts">
-  import { defineComponent } from 'vue';
-  export default defineComponent({
-    name: 'VkButton'
-  })
-</script>
 <script setup lang="ts">
-import { buttonProps } from './types'
-defineProps(buttonProps)
+import type { ButtonProps } from './types'
+defineOptions({
+  name: 'VkButton'
+})
+withDefaults(defineProps<ButtonProps>(), { nativeType: 'button' })
+
 
 
 </script>
