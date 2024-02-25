@@ -2,6 +2,7 @@
 import { ref, reactive, computed, watch, provide } from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
 import MyProfile from './components/MyProfile.vue'
+import Button from './components/Button/Button.vue'
 import useMousePositon from './hooks/useMousePosition'
 import useURLLoader from './hooks/useURLLoader'
 import { langKeys } from './keys'
@@ -50,6 +51,7 @@ const onChange = (hidden: boolean) => {
 
 <template>
   <div>
+    <Button type="success" plain disabled>This is button</Button>
     <h1 ref="headline">{{ like.age }}</h1>
     <button type="button" @click="increase">点我加</button>
     <button type="button" :disabled="buttonStatus.disabled">{{ buttonStatus.text }}</button>

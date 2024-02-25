@@ -1,12 +1,36 @@
 <template>
-  <div class="button">
-    <h2>button</h2>
-  </div>
+  <button
+    class="vk-button"
+    :class="{
+      [`vk-button--$[type]`]: type,
+      [`vk-button--${size}`]: size,
+      'is-plain': plain,
+      'is-round': round,
+      'is-circle': circle,
+      'is-disabled': disabled
+    }"
+    :disabled="disabled"
+  >
+    <span>
+      <slot />
+    </span>
+  </button>
 </template>
 
-<script setup lang="ts"></script>
+<script lang="ts">
+  import { defineComponent } from 'vue';
+  export default defineComponent({
+    name: 'VkButton'
+  })
+</script>
+<script setup lang="ts">
+import { buttonProps } from './types'
+defineProps(buttonProps)
 
-<style lang="less" scoped>
+
+</script>
+
+<style scoped>
 .button{
   
 }

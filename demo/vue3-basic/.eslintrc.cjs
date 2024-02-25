@@ -24,6 +24,7 @@ module.exports = {
         "sourceType": "module"
     },
     "rules": {
-        "semi": 0
+        "semi": 0,
+        "vue/multi-word-component-names": "off"
     }
 };
