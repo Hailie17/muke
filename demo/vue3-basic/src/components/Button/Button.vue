@@ -1,5 +1,6 @@
 <template>
   <button
+    ref="_ref"
     class="vk-button"
     :class="{
       [`vk-button--$[type]`]: type,
@@ -20,13 +21,18 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import type { ButtonProps } from './types'
 defineOptions({
   name: 'VkButton'
 })
 withDefaults(defineProps<ButtonProps>(), { nativeType: 'button' })
 
+const _ref = ref<HTMLButtonElement>()
 
+defineExpose({
+  ref: _ref // 将ref暴露出组件
+})
 
 </script>
 
