@@ -31,7 +31,7 @@ withDefaults(defineProps<ButtonProps>(), { nativeType: 'button' })
 const _ref = ref<HTMLButtonElement>()
 
 defineExpose({
-  ref: _ref // 将ref暴露出组件
+  ref: _ref // 将ref暴露出组件实例
 })
 
 </script>

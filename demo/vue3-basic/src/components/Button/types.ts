@@ -14,6 +14,10 @@ export interface ButtonProps {
   autofocus?: boolean;
 }
 
+export interface ButtonInstance {
+  ref: HTMLButtonElement
+}
+
 export const buttonProps = {
   type: {
     type: String as PropType<ButtonType>

@@ -1,17 +1,25 @@
 <script setup lang="ts">
-import { ref, reactive, computed, watch, provide } from 'vue'
+import { ref, reactive, computed, watch, provide, onMounted } from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
 import MyProfile from './components/MyProfile.vue'
 import Button from './components/Button/Button.vue'
 import useMousePositon from './hooks/useMousePosition'
 import useURLLoader from './hooks/useURLLoader'
 import { langKeys } from './keys'
+import type { ButtonInstance } from './components/Button/types'
 interface DogResult {
   message: string;
   status: string;
 }
 // 需要 .value 来访问值
 const count = ref(0)
+
+const buttonRef = ref<ButtonInstance | null>(null)
+onMounted(() => {
+  if(buttonRef.value) {
+    console.log('buttonRef', buttonRef.value.ref)
+  }
+})
 // 模板引用 ref
 const headline = ref<null | HTMLElement> (null)
 // 参数
@@ -51,7 +59,7 @@ const onChange = (hidden: boolean) => {
 
 <template>
   <div>
-    <Button type="success" plain disabled>This is button</Button>
+    <Button type="success" plain disabled ref="buttonRef">This is button</Button>
     <h1 ref="headline">{{ like.age }}</h1>
     <button type="button" @click="increase">点我加</button>
     <button type="button" :disabled="buttonStatus.disabled">{{ buttonStatus.text }}</button>
