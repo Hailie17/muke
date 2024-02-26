@@ -76,6 +76,7 @@ const onChange = (hidden: boolean) => {
   <h1 v-if="data.loading">正在加载</h1>
   <img v-else :src="data.result.message" alt="">
   <HelloWorld msg="Vite + Vue" />
+  <a href="#">aaa</a>
 </template>
 
 <style scoped>

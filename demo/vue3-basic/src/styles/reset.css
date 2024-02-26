@@ -13,7 +13,7 @@ a {
   text-decoration: none;
 
   &:hover, &:focus {
-    color: var(--vk-color-primary);
+    color: var(--vk-color-primary-light-3);
   }
   &:active {
     color: var(--vk-color-primary-dark-2);
